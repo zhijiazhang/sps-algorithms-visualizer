@@ -1,114 +1,9 @@
 import pygame
+from grid import *
+from node import *
 from queue import PriorityQueue
 
-#setting up visualizer display windowdow
-WIDTH = 800
-WIN = pygame.display.set_mode((WIDTH, WIDTH))
-pygame.display.set_caption("Shortest Path Search Algorithm")
-
-#colors for board
-AQUAMARINE = (28,134,238)
-AQUA = (16,78,139)
-BLUE = (0, 255, 0)
-YELLOW = (255, 255, 0)
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-YELLOW = (255,255,0)
-ORANGE = (255, 165 ,0)
-GREY = (128, 128, 128)
-TURQUOISE = (64, 224, 208)
-
-"""
-Tracks row/column , WIDTH, neighbors, color
-"""
-class Node:
     
-    #properties of each node
-    def __init__(self, row, col, width, total_rows):
-        self.row = row
-        self.col = col 
-        self.x = row * width
-        self.y = col * width
-        self.color = WHITE
-        self.neighbors = []
-        self.width = width
-        self.total_rows = total_rows
-
-
-    #getters and query functions
-    def get_position(self):
-        return self.row, self.col
-
-    def is_closed(self):
-        return self.color == AQUAMARINE
-    
-    def is_open(self): 
-        return self.color == AQUA
-    
-    def is_barrier(self):
-        return self.color == BLACK
-    
-    def is_start(self):
-        return self.color == ORANGE
-    
-    def is_end(self):
-        return self.color == TURQUOISE
-    
-
-    #state change functions
-    def reset(self): 
-        self.color = WHITE
-
-    def make_start(self):
-        self.color = ORANGE
-
-    def make_closed(self):
-        self.color = AQUAMARINE
-
-    def make_open(self):
-        self.color = AQUA
-
-    def make_barrier(self):
-        self.color = BLACK
-
-    def make_end(self):
-        self.color = TURQUOISE
-
-    def make_path(self):
-        self.color = YELLOW
-
-    def draw(self, window): 
-        pygame.draw.rect(window, self.color, (self.x, self.y, self.width, self.width))
-
-
-    def update_neighbors(self, grid):
-        self.neighbors = []
-
-        #check node below
-        if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier():
-            self.neighbors.append(grid[self.row + 1][self.col])
-
-        #check node above
-        if self.row > 0 and not grid[self.row -  1][self.col].is_barrier():
-            self.neighbors.append(grid[self.row - 1][self.col])
-
-        #check node right
-        if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier():
-            self.neighbors.append(grid[self.row][self.col + 1])
-
-        #check node left
-        if self.col > 0 and not grid[self.row ][self.col - 1].is_barrier():
-            self.neighbors.append(grid[self.row][self.col - 1])
-
-            
-
-
-    def __lt__(self, other):
-        return False
-    
-
-
-
 #heuristic function, using the Manhattan Distance Formula aka quickest "L" distance
 def h(point1, point2):
     #extract coordiates
@@ -118,11 +13,7 @@ def h(point1, point2):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
-
-"""
-Takes in the function draw
-
-"""
+#astar algorithm
 def astar(draw, grid, start, end):
 
     #count breaks ties between two nodes that have the same f score
@@ -160,7 +51,7 @@ def astar(draw, grid, start, end):
 
         #if it's the end then we found the shortest path, so need to reconstruct by backtracking
         if current == end:
-            reconstruct_path(previous, end, draw)
+            reconstruct_path(previous, end, start, draw)
             end.make_end()
             return True
         
@@ -189,8 +80,10 @@ def astar(draw, grid, start, end):
                     open_set_hash.add(neighbor)
                     neighbor.make_open()
 
+        #draw updated board
         draw()
-
+        
+        #after we're done with a node mark it as done
         if current != start: 
             current.make_closed()
 
@@ -198,11 +91,16 @@ def astar(draw, grid, start, end):
     return False
 
 
-def reconstruct_path(previous, current, draw):
+
+#retraces back the shortes path
+def reconstruct_path(previous, current, start, draw):
 
     #eventually terminates because start node is not in start
     while current in previous:
         current = previous[current]
+        if current == start:
+            break
+
         current.make_path()
         draw()
 
@@ -226,6 +124,7 @@ def make_grid(rows, width):
 
 
 
+#draws grid lines
 def draw_grid(window, rows, width):
     gap = WIDTH // rows
     for i in range(rows):
@@ -235,6 +134,8 @@ def draw_grid(window, rows, width):
             pygame.draw.line(window, GREY, (j * gap, 0), (j * gap, width))
 
 
+
+#draw grid board
 def draw(window, grid, rows, width):
     window.fill(WHITE)
     for row in grid:
@@ -245,7 +146,7 @@ def draw(window, grid, rows, width):
     pygame.display.update()
 
 
-
+#gets the clock position
 def get_click_position(position, rows, width):
     gap = width // rows
     y, x = position
@@ -258,18 +159,23 @@ def get_click_position(position, rows, width):
 
 
 def main(window, width):
-    ROWS = 50
+
+    #declare number of rows (and columns since its a square) you want. The higher the number the more squares -> the slower it will run
+    ROWS = 40
+
+    #make the grid
     grid = make_grid(ROWS, width)
 
+    #start and end are both None to start
     start = None
     end = None
 
     run = True
-    started = False
+
   
-
     while run:
-
+        
+        #draws the grid
         draw(window, grid, ROWS, width)
 
         #event could be a mouse click, keyboard button pressed etc
@@ -305,7 +211,11 @@ def main(window, width):
                 position = pygame.mouse.get_pos()
                 row, col = get_click_position(position, ROWS, width)
                 node = grid[row][col]
+
+                #reset that node (make it white)
                 node.reset()
+
+                #if deleted start or end nodes, make them None again
                 if node == start:
                     start = None
 
@@ -314,17 +224,19 @@ def main(window, width):
 
 
 
+            #if user presses space, start astar
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
                     for row in grid: 
                         for node in row: 
-                            node.update_neighbors(grid)
 
+                            #update all the neighbors
+                            node.update_neighbors(grid)
 
                     astar(lambda: draw(window, grid, ROWS, width), grid, start, end)
 
             
-
+                #if the user presses "c", clear the board
                 if event.key == pygame.K_c:
                     start = None
                     end = None
@@ -334,6 +246,7 @@ def main(window, width):
 
 
 
+#magic happens
 main(WIN, WIDTH)
 
 
