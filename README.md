@@ -13,7 +13,7 @@ In contrast, Dijkstra's algorithm explores all possible paths equally, without c
 
 **A\* algorithm takes care of this. At a high level, instead of searching toward unnecessary directions, the algorithm makes it's decisions based on heuristics. This results in the algorithm only searching towards New York, which makes it much more efficient than Dijkstra's. Depicted below, from Denver there are 4 possible directions A\* could go in. It will choose to go towards Henderson because that path is going towards New York, while the other 3 are going in the opposite direction.**
 
-![alt text](https://github.com/zhijiazhang/sps-algorithms-visualizer/blob/main/pics/denver.png?raw=true)
 
+<img src="https://github.com/zhijiazhang/sps-algorithms-visualizer/blob/main/pics/denver.png?raw=true"  width="350" height="350">
 
 ## Demo
