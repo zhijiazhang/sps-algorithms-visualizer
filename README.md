@@ -1,6 +1,25 @@
 # Shortest Path Search Algorithm Visualizer
 
+## Functionality Demo
+1. The orange square is the `start` postion
+2. The grey square is the `end` position
+3. The black squares are the barriers (paths have to go around the barriers.)
+4. The yellow path is the shortest path from `start` to `end` !
+
+**#1: Simple Barrier**
+![image alt](https://media.giphy.com/media/W95vvYAUrrRHOKZt3q/giphy.gif)
+
+**#2: Complex Barrier**
+![image alt](https://media.giphy.com/media/VPLufmcxILVEIl6ISD/giphy.gif)
+
+**#3: Complex Barrier**
+![image alt](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGFhNjVlMTY1NDI0NWUxZWM0MmQ2ZTRkYmY0ZTk4NjU1MDNkMWFlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/BOT8GicZ6psBpFGx0A/giphy.gif)
+
+
 ## Background: A* Search Algorithm
+
+What you are seeing in the visualizer is the A* shortest path search algorithm.
+
 The A* algorithm is a popular and powerful pathfinding algorithm that improves upon Dijkstra's algorithm by incorporating heuristic information to guide its search. It is widely used in various applications, including navigation systems and AI.
 
 A* takes into account both the cost of reaching a node from the start and an estimate of the cost to the goal, known as the heuristic function. By considering this heuristic information, A* can prioritize the exploration of paths that are more likely to lead to the goal, resulting in more efficient and informed decision-making.
@@ -15,22 +34,6 @@ In contrast, Dijkstra's algorithm explores all possible paths equally, without c
 
 
 <img src="https://github.com/zhijiazhang/sps-algorithms-visualizer/blob/main/pics/denver.png?raw=true"  width="350" height="350">
-
-## Functionality
-1. The orange square is the `start` postion
-2. The grey square is the `end` position
-3. The black squares are the barriers (paths have to go around the barriers.)
-4. The yellow path is the shortest path from `start` to `end` !
-
-**Demo #1: Simple Barrier**
-![image alt](https://media.giphy.com/media/W95vvYAUrrRHOKZt3q/giphy.gif)
-
-**Demo #2: Complex Barrier**
-![image alt](https://media.giphy.com/media/VPLufmcxILVEIl6ISD/giphy.gif)
-
-**Demo #3: Complex Barrier**
-![image alt](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGFhNjVlMTY1NDI0NWUxZWM0MmQ2ZTRkYmY0ZTk4NjU1MDNkMWFlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/BOT8GicZ6psBpFGx0A/giphy.gif)
-
 
 ## Try it out!
 1.`clone` this repository
