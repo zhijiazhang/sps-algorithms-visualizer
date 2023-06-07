@@ -37,8 +37,14 @@ In contrast, Dijkstra's algorithm explores all possible paths equally, without c
 
 ## Try it out!
 1.`clone` this repository
+<br />
 2. Click run from the astar[dot]py file
-3. Left click to place blocks. First clock is the start block, second click is the end block, the rest will be barrier blocks
+<br />
+3. Left click to place blocks. First clock is the start block, second click is the end 
+block, the rest will be barrier blocks
+<br />
 4. Right click on a block to delete it
+<br />
 5. Press `space` to run the visualizer
+<br />
 6. Press `c` to clear the board.
