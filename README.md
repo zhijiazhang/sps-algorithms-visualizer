@@ -1,4 +1,4 @@
-# Shortest Path Algorithms Visualizer
+# Shortest Path Search Algorithm Visualizer
 
 ## Background: A* Search Algorithm
 The A* algorithm is a popular and powerful pathfinding algorithm that improves upon Dijkstra's algorithm by incorporating heuristic information to guide its search. It is widely used in various applications, including navigation systems and AI.
@@ -16,4 +16,26 @@ In contrast, Dijkstra's algorithm explores all possible paths equally, without c
 
 <img src="https://github.com/zhijiazhang/sps-algorithms-visualizer/blob/main/pics/denver.png?raw=true"  width="350" height="350">
 
-## Demo
+## Functionality
+1. The orange square is the `start` postion
+2. The grey square is the `end` position
+3. The black squares are the barriers (paths have to go around the barriers.)
+4. The yellow path is the shortest path from `start` to `end` !
+
+**Demo #1: Simple Barrier**
+![image alt](https://media.giphy.com/media/W95vvYAUrrRHOKZt3q/giphy.gif)
+
+**Demo #2: Complex Barrier**
+![image alt](https://media.giphy.com/media/VPLufmcxILVEIl6ISD/giphy.gif)
+
+**Demo #3: Complex Barrier**
+![image alt](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGFhNjVlMTY1NDI0NWUxZWM0MmQ2ZTRkYmY0ZTk4NjU1MDNkMWFlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/BOT8GicZ6psBpFGx0A/giphy.gif)
+
+
+## Try it out!
+1.`clone` this repository
+2. Click run from the astar[dot]py file
+3. Left click to place blocks. First clock is the start block, second click is the end block, the rest will be barrier blocks
+4. Right click on a block to delete it
+5. Press `space` to run the visualizer
+6. Press `c` to clear the board.
