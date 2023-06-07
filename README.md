@@ -6,13 +6,13 @@
 3. The black squares are the barriers (paths have to go around the barriers.)
 4. The yellow path is the shortest path from `start` to `end` !
 
-**#1: Simple Barrier**
+
 ![image alt](https://media.giphy.com/media/W95vvYAUrrRHOKZt3q/giphy.gif)
 
-**#2: Complex Barrier**
+
 ![image alt](https://media.giphy.com/media/VPLufmcxILVEIl6ISD/giphy.gif)
 
-**#3: Complex Barrier**
+
 ![image alt](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGFhNjVlMTY1NDI0NWUxZWM0MmQ2ZTRkYmY0ZTk4NjU1MDNkMWFlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/BOT8GicZ6psBpFGx0A/giphy.gif)
 
 
